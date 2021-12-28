@@ -1,8 +1,12 @@
+// ignore: import_of_legacy_library_into_null_safe
 import 'package:avatar_glow/avatar_glow.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_speechtotext/splashscreen.dart';
+
+// ignore: import_of_legacy_library_into_null_safe
 import 'package:highlight_text/highlight_text.dart';
+// ignore: import_of_legacy_library_into_null_safe
 import 'package:speech_to_text/speech_to_text.dart' as stt;
+import 'package:speechtotext/splashscreen.dart';
 
 void main() {
   runApp(MyApp());
@@ -16,6 +20,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.yellow,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: Splash(),
     );
@@ -23,57 +28,14 @@ class MyApp extends StatelessWidget {
 }
 
 class SpeechScreen extends StatefulWidget {
+  const SpeechScreen({Key? key}) : super(key: key);
+
   @override
   _SpeechScreenState createState() => _SpeechScreenState();
 }
 
 class _SpeechScreenState extends State<SpeechScreen> {
-  final Map<String, HighlightedWord> _highlights = {
-    'Howkmii': HighlightedWord(
-      onTap: () => print('Howkmii'),
-      textStyle: const TextStyle(
-        color: Colors.blue,
-        fontWeight: FontWeight.bold,
-      ),
-    ),
-    'Google Developers Student': HighlightedWord(
-      onTap: () => print('Google Developers Student'),
-      textStyle: const TextStyle(
-        color: Colors.green,
-        fontWeight: FontWeight.bold,
-      ),
-    ),
-    'GDSC': HighlightedWord(
-      onTap: () => print('GDSC'),
-      textStyle: const TextStyle(
-        color: Colors.lightGreen,
-        fontWeight: FontWeight.bold,
-      ),
-    ),
-    'Love': HighlightedWord(
-      onTap: () => print('Love'),
-      textStyle: const TextStyle(
-        color: Colors.red,
-        fontWeight: FontWeight.bold,
-      ),
-    ),
-    'like': HighlightedWord(
-      onTap: () => print('like'),
-      textStyle: const TextStyle(
-        color: Colors.blueAccent,
-        fontWeight: FontWeight.bold,
-      ),
-    ),
-    'Abelhakim': HighlightedWord(
-      onTap: () => print('Abdelhakim'),
-      textStyle: const TextStyle(
-        color: Colors.green,
-        fontWeight: FontWeight.bold,
-      ),
-    ),
-  };
-
-  stt.SpeechToText _speech;
+  late stt.SpeechToText _speech;
   bool _isListening = false;
   String _text = 'Press the button';
   double _confidence = 1.0;
@@ -88,7 +50,7 @@ class _SpeechScreenState extends State<SpeechScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('HowkMii speech to text'),
+        title: const Text('HowkMii speech to text'),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: AvatarGlow(
@@ -109,7 +71,6 @@ class _SpeechScreenState extends State<SpeechScreen> {
           padding: const EdgeInsets.fromLTRB(30.0, 30.0, 30.0, 150.0),
           child: TextHighlight(
             text: _text,
-            words: _highlights,
             textStyle: const TextStyle(
               fontSize: 24.0,
               color: Colors.black,
